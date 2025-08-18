@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.Container {
+    height: 100vh;
+    position: relative;
+    /*background: linear-gradient(135deg,rgba(243, 198, 205, 1) 0%, rgba(148, 187, 233, 1) 100%);*/
+    overflow: hidden;
+}
+
+.numbers{
+    font-size: 80px;
+    font-family: 800;
+}

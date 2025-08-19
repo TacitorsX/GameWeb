@@ -1,4 +1,5 @@
 const numberIndicator = document.querySelector('.numbers')
+const pontuacao = document.querySelector('.pont')
 const bar = document.getElementById("bar")
 const button = document.getElementById("button");
 const estado = {chutando: false}; /*controla se o jogador está chutando ou não*/
@@ -55,19 +56,25 @@ function moverBarra(num){
     }
 }
 
-function recurcao  (num,des,vel) {
+// a variavel recurssao usa o (num) que define a altura da bola, (des) que define se o num esta subindo ou descendo, (vel) o tempo de um passo,(pont) que é a pontução atual
+function recurcao  (num,des,vel,pont) {
     numberIndicator.textContent = String(num).padStart(2,0)
+    pontuacao.textContent = String(pont).padStart(2,0)
     moverBarra(num)
+    // quando a bola chega a 10 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
     if (num >= 10){
-        return setTimeout(recurcao, vel,num-1,true,vel)
+        return setTimeout(recurcao, vel,num-1,true,vel,pont)
     }
+    // se o jogador estiver chutando ele checa se o num é dois ou menor, se for bota des pra falso, joga o num pra cima e adiciona pontuação 
     if (estado.chutando){
         if (num <=2 && num >=0){
             if (vel - 20 >= 0){
-                return recurcao(num+1,false,vel-20)
+                pararChutar()
+                return recurcao(num+1,false,vel-20,pont+3-num)
             }
             else{
-                return recurcao(num+1,false,10)
+                pararChutar()
+                return recurcao(num+1,false,10,pont+3-num)
             }
         }
     }
@@ -76,11 +83,11 @@ function recurcao  (num,des,vel) {
     }
     
     if (des){
-        return setTimeout(recurcao, vel,num-1,true,vel)
+        return setTimeout(recurcao, vel,num-1,true,vel,pont)
     }
     else{
-        return setTimeout(recurcao, vel,num+1,false,vel)
+        return setTimeout(recurcao, vel,num+1,false,vel,pont)
     }   
 }
 
-recurcao(5,false,500)
+recurcao(1,false,500,0)

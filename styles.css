@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh; /* altura total da tela */
-    background-image: url("./img/Background.jpeg"); /* caminho da imagem */
+    background-image: url("./img/Background.png"); /* caminho da imagem */
     background-size: cover; /* cobre toda a tela */
     background-position: center; /* centraliza */
     background-repeat: no-repeat; /* não repete */
@@ -75,9 +75,9 @@ position: absolute;
     display: flex;
     justify-content: center; /* Centraliza horizontalmente */
     top: 40%;
-    left: 46%;
+    left: 43%;
     z-index: 3;
-    opacity: 0;
+    opacity: 1;
 }
 
 .playerIdleRight{
@@ -85,9 +85,9 @@ position: absolute;
     display: flex;
     justify-content: center; /* Centraliza horizontalmente */
     top: 40%;
-    left: 46%;
+    left: 43%;
     z-index: 3;
-    opacity: 0;
+    opacity: 1;
 }
 
 .playerKickLeft{
@@ -95,9 +95,9 @@ position: absolute;
     display: flex;
     justify-content: center; /* Centraliza horizontalmente */
     top: 40%;
-    left: 46%;
+    left: 43%;
     z-index: 3;
-    opacity: 0;
+    opacity: 1;
 }
 
 .playerKickRight{
@@ -105,9 +105,9 @@ position: absolute;
     display: flex;
     justify-content: center; /* Centraliza horizontalmente */
     top: 40%;
-    left: 46%;
+    left: 43%;
     z-index: 3;
-    opacity: 0;
+    opacity: 1;
 }
 
 .ball{
@@ -122,8 +122,11 @@ position: absolute;
     position: absolute;
     display: flex;
     justify-content: center; /* Centraliza horizontalmente */
-    top: 80%;
-    left: 47%;
+    width: 770px;
+    height: 800px;
+    opacity: 0.1;
+    top: -20%;
+    left: 0%;
     z-index: 10;
 }
 
@@ -131,7 +134,10 @@ position: absolute;
     position: absolute;
     display: flex;
     justify-content: center; /* Centraliza horizontalmente */
-    top: 80%;
+    width: 770px;
+    height: 800px;
+    opacity: 0.1;
+    top: -20%;
     left: 50%;
     z-index: 10;
 }

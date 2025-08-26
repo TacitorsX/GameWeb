@@ -1,11 +1,19 @@
 const numberIndicator = document.querySelector('.numbers')
 const pontuacao = document.querySelector('.pont')
-const bar = document.getElementById("bar")
+const ball = document.getElementById("ball")
 const button1 = document.getElementById("button1");
+
+const playerIdleLeft = document.getElementById("playerIdleLeft");
+const playerKickLeft = document.getElementById("playerKickLeft");
+const playerIdleRight = document.getElementById("playerIdleRight");
+const playerKickRight = document.getElementById("playerKickRight");
 
 const velocidadeInicial = 80;
 const intervaloChute = 6;//determina a partir de qual número o usuário pode chutar
 const velocidadeMinima = 20;
+
+const audio = document.getElementById("audio")
+const audio1 = document.getElementById("audio1")
 
 const dificuldades = {
     dif1:{
@@ -60,9 +68,36 @@ const estadosBola = [
     {dirFinal:false,fun:"foguete"}
 ];
 
-const esquerda = {chutando: false}; /*controla se o jogador está chutando pra esquerda ou não*/
-const estado1 = {consegueChutar: true};/*Controla se o jogador conseguiu chutar*/
+const esquerda = {chutando: false} /*controla se o jogador está chutando pra esquerda ou não*/
+const estado1 = {consegueChutar: true}/*Controla se o jogador conseguiu chutar*/
 const direita = {chutando: false}
+
+const keyboardClick = document.addEventListener('keydown',function(event){
+    if(event.keyCode==37){
+        if (estado1.consegueChutar){
+        esquerda.chutando = true;/*O jogador começou a chutar*/
+        estado1.consegueChutar = false;/*Jogador não chuta imediatamente após o chute anterior*/
+        playerKickLeft.style.opacity=1
+        playerKickRight.style.opacity=0
+        playerIdleLeft.style.opacity=0
+        setTimeout(pararChutar,1000)/*define quando parar o chute*/
+    }
+} 
+    if(event.keyCode==39){
+        if (estado1.consegueChutar){
+        direita.chutando = true;/*O jogador começou a chutar*/
+        estado1.consegueChutar = false;/*Jogador não chuta imediatamente após o chute anterior*/
+        playerKickLeft.style.opacity=0
+        playerKickRight.style.opacity=1
+        playerIdleRight.style.opacity=0
+        setTimeout(pararChutar,1000)/*define quando parar o chute*/
+    }
+}
+    if(event.keyCode==13){
+        audio.play()
+        audio1.play()
+    }
+})
 
 //pega um estado da bola aleatorio
 const random = (dif) => Math.floor(Math.random() * dif.estados.length);
@@ -71,6 +106,9 @@ button1.onclick = () => {
     if (estado1.consegueChutar){
         esquerda.chutando = true;/*O jogador começou a chutar*/
         estado1.consegueChutar = false;/*Jogador não chuta imediatamente após o chute anterior*/
+        playerKickLeft.style.opacity=1
+        playerKickRight.style.opacity=0
+        playerIdleLeft.style.opacity=0
         setTimeout(pararChutar,1000)/*define quando parar o chute*/
     }
 }
@@ -78,6 +116,9 @@ button2.onclick = () => {
     if (estado1.consegueChutar){
         direita.chutando = true;/*O jogador começou a chutar*/
         estado1.consegueChutar = false;/*Jogador não chuta imediatamente após o chute anterior*/
+        playerKickLeft.style.opacity=0
+        playerKickRight.style.opacity=1
+        playerIdleRight.style.opacity=0
         setTimeout(pararChutar,1000)/*define quando parar o chute*/
     }
 }
@@ -91,18 +132,20 @@ function pararChutar(){
     esquerda.chutando = false;
     direita.chutando = false;
     estado1.consegueChutar = true;
+    playerKickLeft.style.opacity=0;
+    playerKickRight.style.opacity=0;
 }
 
 //Marcador estilo barra, atualiza sua posição
 function moverBarra(num,dir){
-    if (dir != "esquerda" && dir != "direita"){
-        bar.style.transform = `translate(0px, ${-14*num*0.8}px)`
-    }
     if (dir == "esquerda"){
-        bar.style.transform = `translate(-40.5px, ${-14*num*0.8}px)`
-    }
-    if (dir == "direita"){
-        bar.style.transform = `translate(40.5px,${-14*num*0.8}px)`
+        ball.style.transform = `translate(-40.5px, ${-15*num*0.8}px)`
+        playerIdleLeft.style.opacity=1;
+        playerIdleRight.style.opacity=0;
+    } else if (dir == "direita"){
+        ball.style.transform = `translate(40.5px,${-15*num*0.8}px)`
+        playerIdleLeft.style.opacity=0;
+        playerIdleRight.style.opacity=1;
     }
     
 }
@@ -215,7 +258,6 @@ function trocarEstado(num,_vel,pont,dir){
         foguete(num,false, dificuldade.vel,pont,dir,novoEstado.dir)
     }
 }
-
 
 //inicio do jogo
 trocarEstado(1,velocidadeInicial,0,"esquerda")

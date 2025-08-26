@@ -5,32 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--CSS-->
     <link rel="stylesheet" href="styles.css">
-    <title>GameWeb</title>
+    <title>Super Embaixadinha 2000</title>
 </head>
 <body>
-    <button id="button1">ChuteEsquerdo</button>
-    <button id="button2">ChuteDireita</button>
+    <audio autoplay id="audio">
+        <source src="./audio/super-embaixadinha-2000-final-complete.mp3" type="audio/mpeg">
+        O seu navegador não suporta o elemento de áudio.
+    </audio>
+    <audio autoplay id="audio1">
+        <source src="./audio/retro-8bit-happy-videogame-music-246631.mp3" type="audio/mpeg">
+    </audio>
+    <button class="button1" id="button1">ChuteEsquerdo</button>
+    <button class="button2" id="button2">ChuteDireita</button>
     <main class="Container">
         <!--Teste Números-->
         <div class="numbers">00</div>
-        <div class="pont">00</div>
+        <div class="score">
+            <div class="text-score">Score:</div>
+            <div class="rot"></div>
+            <div class="pont">00</div>
+        </div>
         <!--Barra de poder-->
         <div class="Indicators">
             <div class="dot" alt="00"></div>
             <div class="dot" alt="01"></div>
-            <div class="dot" alt="02"></div>
-            <div class="dot" alt="03"></div>
-            <div class="dot" alt="04"></div>
-            <div class="dot" alt="05"></div>
-            <div class="dot" alt="06"></div>
-            <div class="dot" alt="07"></div>
-            <div class="dot" alt="08"></div>
-            <div class="dot" alt="09"></div>
-            <div class="dot" alt="10"></div>
             <div class="bar" id="bar"></div>
         </div>
+
+        <div class="img-player">
+            <div class="playerIdleLeft" id="playerIdleLeft"><img src="./img/player_left_idle.png"></div>
+            <div class="playerKickLeft" id="playerKickLeft"><img src="./img/player_left_kick.png"></div>
+            <div class="playerIdleRight" id="playerIdleRight"><img src="./img/player_right_idle.png"></div>
+            <div class="playerKickRight" id="playerKickRight"><img src="./img/player_right_kick.png"></div>
+        </div>
+        <div class="ball" id="ball"><img src="./img/Ball.png"></div>
     </main>
 </body>
 <!--Scripts-->
+<script>alert("Bem vindo ao Super Embaixadinha 2000!\nAqui você vai fazer embaixadinhas como na vida real\nTutorial: Mantenha a bola sempre acima do peito, caso contrário se for abaixo, perde!\nUse as setas do teclado(Esquerda ou Direita) ou use os botões embaixo do jogador.\nTente fazer o máximo de pontos. Boa sorte e tenha um bom jogo! =D")</script>
 <script src="./scripts.js"></script>
 </html>

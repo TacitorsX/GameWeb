@@ -15,66 +15,87 @@ const velocidadeMinima = 20;
 const audio = document.getElementById("audio")
 const audio1 = document.getElementById("audio1")
 
-const dificuldades = {
-    dif1:{
+
+// as dificuldades, elas tem as maneiras que a bola pode se mover, a velocidade, o nivel machimo e minimo
+const dificuldades = [
+    {
         estados:[
             {dirFinal:true,fun:"recurcao"},
             {dirFinal:false,fun:"recurcao"}
         ],
         vel:60,
         minNivel:0,
-        proxNivel:5
+        proxNivel:10
     },
-    dif2:{
+    {
+        estados:[
+            {dirFinal:"esquerda",fun:"recurcao"},
+            {dirFinal:"direita",fun:"recurcao"},
+            {dirFinal:"esquerda",fun:"sacana"},
+            {dirFinal:"direita",fun:"sacana"}
+        ],
+        vel:50,
+        minNivel:10,
+        proxNivel:20
+    },
+    {
         estados:[
             {dirFinal:"esquerda",fun:"recurcao"},
             {dirFinal:"direita",fun:"recurcao"},
             {dirFinal:"esquerda",fun:"trocar"},
-            {dirFinal:"direita",fun:"trocar"},
+            {dirFinal:"direita",fun:"trocar"}
         ],
         vel:40,
-        minNivel:5,
-        proxNivel:15
+        minNivel:20,
+        proxNivel:30
     },
-    dif3:{
+    {
         estados:[
             {dirFinal:"esquerda",fun:"recurcao"},
             {dirFinal:"direita",fun:"recurcao"},
             {dirFinal:"esquerda",fun:"trocar"},
             {dirFinal:"direita",fun:"trocar"},
+            {dirFinal:"esquerda",fun:"sacana"},
+            {dirFinal:"direita",fun:"sacana"}
         ],
         vel:30,
-        minNivel:15,
-        proxNivel:25
+        minNivel:30,
+        proxNivel:40
     },
-    dif4:{
+    {
         estados:[
             {dirFinal:"esquerda",fun:"recurcao"},
             {dirFinal:"direita",fun:"recurcao"},
-            {dirFinal:"esquerda",fun:"trocar"},
-            {dirFinal:"direita",fun:"trocar"},
             {dirFinal:"esquerda",fun:"foguete"},
             {dirFinal:"direita",fun:"foguete"}
         ],
         vel:20,
-        minNivel:25,
-        proxNivel:3000000000000000000000
+        minNivel:40,
+        proxNivel:50
+    },
+    {
+        estados:[
+            {dirFinal:"esquerda",fun:"recurcao"},
+            {dirFinal:"direita",fun:"recurcao"},
+            {dirFinal:"esquerda",fun:"foguete"},
+            {dirFinal:"direita",fun:"foguete"},
+            {dirFinal:"esquerda",fun:"trocar"},
+            {dirFinal:"direita",fun:"trocar"},
+            {dirFinal:"esquerda",fun:"sacana"},
+            {dirFinal:"direita",fun:"sacana"}
+        ],
+        vel:20,
+        minNivel:50,
+        proxNivel:35000000000000000000
     }
-}
+]
 
-//estados de lado e a função que a bola usa pra se mover se dir for true a bola tá na esquerda
-const estadosBola = [
-    {dirFinal:true,fun:"recurcao"},
-    {dirFinal:false,fun:"recurcao"},
-    {dirFinal:true,fun:"trocar"},
-    {dirFinal:false,fun:"trocar"},
-    {dirFinal:true,fun:"foguete"},
-    {dirFinal:false,fun:"foguete"}
-];
+
 
 const esquerda = {chutando: false} /*controla se o jogador está chutando pra esquerda ou não*/
 const estado1 = {consegueChutar: true}/*Controla se o jogador conseguiu chutar*/
 const direita = {chutando: false}
+const jogando = {jogando:false}
 
 const keyboardClick = document.addEventListener('keydown',function(event){
     if(event.keyCode==37){
@@ -109,6 +130,7 @@ const keyboardClick = document.addEventListener('keydown',function(event){
 
 //pega um estado da bola aleatorio
 const random = (dif) => Math.floor(Math.random() * dif.estados.length);
+
 //random() é utilizado em trocarEstado() para variar o comportamento do jogo
 button1.onclick = () => {
     if (estado1.consegueChutar){
@@ -169,14 +191,17 @@ function moverBarra(num,dir){
     
 }
 
+// filtra a dificuldade pela pontuação atual entre o nivel minimo e maximo de cada dificuldade
 function dificuldadeAtual(pont){
-    return pont<=5?dificuldades.dif1:pont<=15?dificuldades.dif2:pont<=25?dificuldades.dif3:dificuldades.dif4
+    return dificuldades.filter(x=>x.minNivel <= pont && pont < x.proxNivel)[0]
 }
 
+// checa se a direção da bola é a posição final, se não for usa moveDireção
 function checaDireção (num,dir,dirFinal){
-    return dir == dirFinal? dirFinal :num == 49? moveDireção(dir): dir
+    return dir == dirFinal? dir :num == 49? moveDireção(dir): dir
 }
 
+// seforesquerda passa pra meioE se for meioE passapra direita e assim vai
 function moveDireção(dir){
     return dir == "esquerda"? "meioE" : dir == "meioE"? "direita" :dir == "direita"? "meioD" : dir == "meioD"? "esquerda" :"esquerda"
 }
@@ -216,7 +241,7 @@ function trocar(num,des,vel,pont,dir,dirFinal) {
 
     // quando a bola chega a 10 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
     if (num >= 50){
-        return setTimeout(()=>trocar(num-1,true,vel,pont,moveDireção(dirFinal),dirFinal),vel)
+        return setTimeout(()=>trocar(num-1,true,vel,pont,moveDireção(moveDireção(dirFinal)),dirFinal),vel)
     }
     // se o jogador estiver chutando ele checa se o num está dentro do intervalo
     // se positivo, joga o num pra cima, e se o jogador chutar registra o chute e adiciona pontuação, depois troca de estado.
@@ -234,6 +259,7 @@ function trocar(num,des,vel,pont,dir,dirFinal) {
     }
 }   
 
+// mesmo esquema que recucao mais a bola espera antes de cair
 function foguete(num,des,vel,pont,dir,dirFinal){
     numberIndicator.textContent = String(num).padStart(2,0)
     pontuacao.textContent = String(pont).padStart(2,0)
@@ -253,11 +279,41 @@ function foguete(num,des,vel,pont,dir,dirFinal){
     if (num < 0) return;
 
     if (des){
-        return setTimeout(()=> foguete(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),velocidadeMinima+30);   
+        return setTimeout(()=> foguete(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),velocidadeMinima);   
     }
     else{
         return setTimeout(()=> foguete(num+1,false,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),velocidadeMinima);
     }
+}
+
+// a bola vai e volta
+function sacana  (num,des,vel,pont,dir,dirFinal,volta) {
+    numberIndicator.textContent = String(num).padStart(2,0)
+    pontuacao.textContent = String(pont).padStart(2,0)
+    moverBarra(num,dir)
+    // quando a bola chega a 10 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
+    
+    if (num >= 50){
+        return setTimeout(()=>sacana(num-1,true,vel,pont,dir,dirFinal,volta),vel)
+    }
+    if (num == 40 && des && volta){
+        return setTimeout(()=>sacana(num+1,false,vel,pont,dir,!dirFinal,!volta),vel)
+    }
+
+    // se o jogador estiver chutando ele checa se o num é dois ou menor, se for bota des pra falso, joga o num pra cima e adiciona pontuação 
+    if (checarChute(dir) && des && num <= intervaloChute && num >= 0){
+        const novaVel = Math.max(velocidadeMinima, vel - 5);
+        return trocarEstado(num+1, novaVel, pont + intervaloChute - num,dir,dirFinal);
+    }
+
+    if (num < 0) return;
+
+    if (des){
+        return setTimeout(()=> sacana(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal,volta),vel);   
+    }
+    else{
+        return setTimeout(()=> sacana(num+1,false,vel,pont,checaDireção(num,dir,dirFinal),dirFinal,volta),velocidadeMinima);
+    }   
 }
 
 //troca a função que a bola usa pra se mover depois de um chute
@@ -274,8 +330,13 @@ function trocarEstado(num,_vel,pont,dir){
     if (novoEstado.fun === "foguete"){
         foguete(num,false, dificuldade.vel,pont,dir,novoEstado.dirFinal)
     }
+    if (novoEstado.fun === "sacana"){
+        sacana(num,false, dificuldade.vel,pont,dir,novoEstado.dirFinal,true)
+    }
 }
 
 //inicio do jogo
 animarChute()
-recurcao  (0,false,60,0,"esquerda","esquerda")
+jogando.jogando = true
+trocarEstado(1,80,0,"esquerda")
+jogando.jogando = false

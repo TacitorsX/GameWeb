@@ -23,7 +23,7 @@ const dificuldades = [
             {dirFinal:true,fun:"recurcao"},
             {dirFinal:false,fun:"recurcao"}
         ],
-        vel:60,
+        vel:40,
         minNivel:0,
         proxNivel:10
     },
@@ -34,7 +34,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"sacana"},
             {dirFinal:"direita",fun:"sacana"}
         ],
-        vel:50,
+        vel:30,
         minNivel:10,
         proxNivel:20
     },
@@ -45,7 +45,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"trocar"},
             {dirFinal:"direita",fun:"trocar"}
         ],
-        vel:40,
+        vel:25,
         minNivel:20,
         proxNivel:30
     },
@@ -58,7 +58,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"sacana"},
             {dirFinal:"direita",fun:"sacana"}
         ],
-        vel:30,
+        vel:20,
         minNivel:30,
         proxNivel:40
     },
@@ -69,7 +69,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"foguete"},
             {dirFinal:"direita",fun:"foguete"}
         ],
-        vel:20,
+        vel:15,
         minNivel:40,
         proxNivel:50
     },
@@ -84,9 +84,111 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"sacana"},
             {dirFinal:"direita",fun:"sacana"}
         ],
-        vel:20,
+        vel:15,
         minNivel:50,
-        proxNivel:35000000000000000000
+        proxNivel:60
+    },
+    {
+        estados:[
+            {dirFinal:"esquerda",fun:"recurcao"},
+            {dirFinal:"direita",fun:"recurcao"},
+            {dirFinal:"esquerda",fun:"foguete"},
+            {dirFinal:"direita",fun:"foguete"},
+            {dirFinal:"esquerda",fun:"trocar"},
+            {dirFinal:"direita",fun:"trocar"},
+            {dirFinal:"esquerda",fun:"sacana"},
+            {dirFinal:"direita",fun:"sacana"},
+            {dirFinal:"esquerda",fun:"sacanaStart"},
+            {dirFinal:"direita",fun:"sacanaStart"}
+        ],
+        vel:15,
+        minNivel:60,
+        proxNivel:70
+    },
+    {
+        estados:[
+            {dirFinal:"esquerda",fun:"recurcao"},
+            {dirFinal:"direita",fun:"recurcao"},
+            {dirFinal:"esquerda",fun:"foguete"},
+            {dirFinal:"direita",fun:"foguete"},
+            {dirFinal:"esquerda",fun:"trocar"},
+            {dirFinal:"direita",fun:"trocar"},
+            {dirFinal:"esquerda",fun:"sacana"},
+            {dirFinal:"direita",fun:"sacana"},
+            {dirFinal:"esquerda",fun:"sacanaStart"},
+            {dirFinal:"direita",fun:"sacanaStart"}
+        ],
+        vel:15,
+        minNivel:70,
+        proxNivel:80
+    },
+    {
+        estados:[
+            {dirFinal:"esquerda",fun:"foguete"},
+            {dirFinal:"direita",fun:"foguete"},
+            {dirFinal:"esquerda",fun:"foguete2"},
+            {dirFinal:"direita",fun:"foguete2"}
+        ],
+        vel:10,
+        minNivel:80,
+        proxNivel:90
+    },
+    {
+        estados:[
+            {dirFinal:"esquerda",fun:"recurcao"},
+            {dirFinal:"direita",fun:"recurcao"},
+            {dirFinal:"esquerda",fun:"foguete"},
+            {dirFinal:"direita",fun:"foguete"},
+            {dirFinal:"esquerda",fun:"foguete2"},
+            {dirFinal:"direita",fun:"foguete2"},
+            {dirFinal:"esquerda",fun:"trocar"},
+            {dirFinal:"direita",fun:"trocar"},
+            {dirFinal:"esquerda",fun:"sacana"},
+            {dirFinal:"direita",fun:"sacana"},
+            {dirFinal:"esquerda",fun:"sacanaStart"},
+            {dirFinal:"direita",fun:"sacanaStart"}
+        ],
+        vel:10,
+        minNivel:90,
+        proxNivel:100
+    },
+    {
+        estados:[
+            {dirFinal:"esquerda",fun:"recurcao"},
+            {dirFinal:"direita",fun:"recurcao"},
+            {dirFinal:"esquerda",fun:"foguete"},
+            {dirFinal:"direita",fun:"foguete"},
+            {dirFinal:"esquerda",fun:"foguete2"},
+            {dirFinal:"direita",fun:"foguete2"},
+            {dirFinal:"esquerda",fun:"trocar"},
+            {dirFinal:"direita",fun:"trocar"},
+            {dirFinal:"esquerda",fun:"sacana"},
+            {dirFinal:"direita",fun:"sacana"},
+            {dirFinal:"esquerda",fun:"sacanaStart"},
+            {dirFinal:"direita",fun:"sacanaStart"}
+        ],
+        vel:10,
+        minNivel:100,
+        proxNivel:9999999999999999999999999999999999999999999
+    },
+    {
+        estados:[
+            {dirFinal:"esquerda",fun:"recurcao"},
+            {dirFinal:"direita",fun:"recurcao"},
+            {dirFinal:"esquerda",fun:"foguete"},
+            {dirFinal:"direita",fun:"foguete"},
+            {dirFinal:"esquerda",fun:"foguete2"},
+            {dirFinal:"direita",fun:"foguete2"},
+            {dirFinal:"esquerda",fun:"trocar"},
+            {dirFinal:"direita",fun:"trocar"},
+            {dirFinal:"esquerda",fun:"sacana"},
+            {dirFinal:"direita",fun:"sacana"},
+            {dirFinal:"esquerda",fun:"sacanaStart"},
+            {dirFinal:"direita",fun:"sacanaStart"}
+        ],
+        vel:5,
+        minNivel:100,
+        proxNivel:9999999999999999999999999999999999999999999
     }
 ]
 
@@ -95,7 +197,6 @@ const dificuldades = [
 const esquerda = {chutando: false} /*controla se o jogador está chutando pra esquerda ou não*/
 const estado1 = {consegueChutar: true}/*Controla se o jogador conseguiu chutar*/
 const direita = {chutando: false}
-const jogando = {jogando:false}
 
 const keyboardClick = document.addEventListener('keydown',function(event){
     if(event.keyCode==37){
@@ -103,7 +204,7 @@ const keyboardClick = document.addEventListener('keydown',function(event){
         esquerda.chutando = true;/*O jogador começou a chutar*/
         estado1.consegueChutar = false;/*Jogador não chuta imediatamente após o chute anterior*/
         playerKickLeft.style.transform=`translate(50px, 0px)`
-        playerKickRight.style.transform=`translate(9999px, 9999px)`
+        playerKickRight.style.transform=`translate(99999999px, 99999999px)`
         playerIdleLeft.style.opacity=0
         playerIdleRight.style.opacity=0
         setTimeout(pararChutar,1000)/*define quando parar o chute*/
@@ -114,7 +215,7 @@ const keyboardClick = document.addEventListener('keydown',function(event){
         if (estado1.consegueChutar){
         direita.chutando = true;/*O jogador começou a chutar*/
         estado1.consegueChutar = false;/*Jogador não chuta imediatamente após o chute anterior*/
-        playerKickLeft.style.transform=`translate(9999px, 9999px)`
+        playerKickLeft.style.transform=`translate(99999999px, 99999999px)`
         playerKickRight.style.transform=`translate(50px, 0px)`
         playerIdleLeft.style.opacity=0
         playerIdleRight.style.opacity=0
@@ -137,7 +238,7 @@ button1.onclick = () => {
         esquerda.chutando = true;/*O jogador começou a chutar*/
         estado1.consegueChutar = false;/*Jogador não chuta imediatamente após o chute anterior*/
         playerKickLeft.style.transform=`translate(50px, 0px)`
-        playerKickRight.style.transform=`translate(9999px, 9999px)`
+        playerKickRight.style.transform=`translate(99999999px, 99999999px)`
         playerIdleLeft.style.opacity=0
         playerIdleRight.style.opacity=0
         setTimeout(pararChutar,1000)/*define quando parar o chute*/
@@ -148,7 +249,7 @@ button2.onclick = () => {
     if (estado1.consegueChutar){
         direita.chutando = true;/*O jogador começou a chutar*/
         estado1.consegueChutar = false;/*Jogador não chuta imediatamente após o chute anterior*/
-        playerKickLeft.style.transform=`translate(9999px, 9999px)`
+        playerKickLeft.style.transform=`translate(99999999px, 99999999px)`
         playerKickRight.style.transform=`translate(50px, 0px)`
         playerIdleLeft.style.opacity=0
         playerIdleRight.style.opacity=0
@@ -169,22 +270,25 @@ function pararChutar(){
 }
 
 function animarChute(){
-    playerKickLeft.style.transform=`translate(9999px, 9999px)`
-    playerKickRight.style.transform=`translate(9999px, 9999px)`
+    //coloca os sprites de chute pra fora da tela e ativa os sprites normais
+    playerKickLeft.style.transform=`translate(99999999px, 99999999px)`
+    playerKickRight.style.transform=`translate(99999999px, 99999999px)`
     playerIdleLeft.style.opacity=1
     playerIdleRight.style.opacity=1
 }
 
-//Marcador estilo barra, atualiza sua posição
-function moverBarra(num,dir){
+//move a bola dependendo da direção e numero atual
+function moverBola(num,dir){
     if (dir == "esquerda"){
         ball.style.transform = `translate(-60.5px, ${-15*num*0.6 + 50}px)`
         playerIdleLeft.style.transform= `translate(50px, 0px)`
-        playerIdleRight.style.transform=`translate(9999px, 9999px)`
+        playerIdleRight.style.transform=`translate(99999999px, 99999999px)`
+        
     } else if (dir == "direita"){
         ball.style.transform = `translate(80.5px,${-15*num*0.6 + 50}px)`
-        playerIdleLeft.style.transform=`translate(9999px, 9999px)`
+        playerIdleLeft.style.transform=`translate(99999999px, 99999999px)`
         playerIdleRight.style.transform=`translate(50px, 0px)`;
+
     }else{
         ball.style.transform = `translate(20px,${-15*num*0.6 + 50}px)`
     }
@@ -193,6 +297,7 @@ function moverBarra(num,dir){
 
 // filtra a dificuldade pela pontuação atual entre o nivel minimo e maximo de cada dificuldade
 function dificuldadeAtual(pont){
+    //o retorno do filter é uma lista de uma coisa só ent a gente pega o primeiro iten com o [0]
     return dificuldades.filter(x=>x.minNivel <= pont && pont < x.proxNivel)[0]
 }
 
@@ -209,19 +314,19 @@ function moveDireção(dir){
 function recurcao  (num,des,vel,pont,dir,dirFinal) {
     numberIndicator.textContent = String(num).padStart(2,0)
     pontuacao.textContent = String(pont).padStart(2,0)
-    moverBarra(num,dir)
-    // quando a bola chega a 10 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
+    moverBola(num,dir)
+    // quando a bola chega a 50 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
     
     if (num >= 50){
         return setTimeout(()=>recurcao(num-1,true,vel,pont,dir,dirFinal),vel)
     }
-    // se o jogador estiver chutando ele checa se o num é dois ou menor, se for bota des pra falso, joga o num pra cima e adiciona pontuação 
+    // se a bola tiver descendo, o chute acertou e a bola tá no intervalo de chute, volta pra função principal e adiciona pontuação
     if (checarChute(dir) && des && num <= intervaloChute && num >= 0){
         const novaVel = Math.max(velocidadeMinima, vel - 5);
         return trocarEstado(num+1, novaVel, pont + intervaloChute - num,dir,dirFinal);
     }
 
-    if (num < 0) return;
+    if (num < 0) {return};
 
     if (des){
         return setTimeout(()=> recurcao(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),vel);   
@@ -236,10 +341,12 @@ function trocar(num,des,vel,pont,dir,dirFinal) {
     numberIndicator.textContent = String(num).padStart(2,0);
     pontuacao.textContent = String(pont).padStart(2,0);
 
-    const trocarDireção = (num%10 == 0) ? moveDireção(dir) : dir;
-    moverBarra(num,dir);
+    moverBola(num,dir);
 
-    // quando a bola chega a 10 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
+    //se a posição da bola for um multiplo a direção é alterada
+    const trocarDireção = (num%10 == 0) ? moveDireção(dir) : dir;
+
+    // quando a bola chega a 50 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
     if (num >= 50){
         return setTimeout(()=>trocar(num-1,true,vel,pont,moveDireção(moveDireção(dirFinal)),dirFinal),vel)
     }
@@ -249,7 +356,7 @@ function trocar(num,des,vel,pont,dir,dirFinal) {
             const novaVel = Math.max(velocidadeMinima, vel - 5);
             return trocarEstado(num+1,novaVel,pont+intervaloChute-num,dir);
     }
-    if (num < 0) return;
+    if (num < 0) {return};
     
     if (des){
         return setTimeout(()=> trocar(num-1,true,vel,pont,trocarDireção,dirFinal), vel);
@@ -263,35 +370,99 @@ function trocar(num,des,vel,pont,dir,dirFinal) {
 function foguete(num,des,vel,pont,dir,dirFinal){
     numberIndicator.textContent = String(num).padStart(2,0)
     pontuacao.textContent = String(pont).padStart(2,0)
+
+    // se o num da bola for maior que 10 ela fica parada em cima, quando chega a 10 ela cai rapidamente
     const altura = !des? num : num>10?50:num*(50/10)
-    moverBarra(altura,dir)
-    // quando a bola chega a 10 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
+    moverBola(altura,dir)
+    // quando a bola chega a 50 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
     
     if (num >= 50){
         return setTimeout(()=>foguete(num-1,true,vel,pont,dir,dirFinal),vel)
     }
-    // se o jogador estiver chutando ele checa se o num é dois ou menor, se for bota des pra falso, joga o num pra cima e adiciona pontuação 
+    // se a bola tiver descendo, o chute acertou e a bola tá no intervalo de chute, volta pra função principal e adiciona pontuação
     if (checarChute(dir) && des && num <= intervaloChute && num >= 0){
         const novaVel = Math.max(velocidadeMinima, vel - 5);
         return trocarEstado(num+1, novaVel, pont + intervaloChute - num,dir,dirFinal);
     }
 
-    if (num < 0) return;
+    if (num < 0) {return};
 
     if (des){
-        return setTimeout(()=> foguete(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),velocidadeMinima);   
+        return setTimeout(()=> foguete(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),velocidadeMinima+10);   
     }
     else{
         return setTimeout(()=> foguete(num+1,false,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),velocidadeMinima);
     }
 }
 
+function foguete2(num,des,vel,pont,dir,dirFinal){
+    numberIndicator.textContent = String(num).padStart(2,0)
+    pontuacao.textContent = String(pont).padStart(2,0)
+
+    // se a bola for maior que 10 ela fica parada em cima, quando chega a 10 ela cai rapidamente
+    const altura = !des? num : num>30?50 :num <= 20 && num>15?25 :num > 20?num*(50/30):num*(20/15)
+    moverBola(altura,dir)
+    // quando a bola chega a 50 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
+    
+    if (des && (num == 20 || num == 15)){
+        return setTimeout(()=> foguete2(num-1,true,vel,pont,moveDireção(dir),dirFinal),velocidadeMinima+30); 
+    }
+
+    if (num >= 50){
+        return setTimeout(()=>foguete2(num-1,true,vel,pont,dir,dirFinal),vel)
+    }
+    // se a bola tiver descendo, o chute acertou e a bola tá no intervalo de chute, volta pra função principal e adiciona pontuação
+    if (checarChute(dir) && des && num <= intervaloChute && num >= 0){
+        const novaVel = Math.max(velocidadeMinima, vel - 5);
+        return trocarEstado(num+1, novaVel, pont + intervaloChute - num,dir,dirFinal);
+    }
+
+    if (num < 0) {return};
+
+    if (des){
+        return setTimeout(()=> foguete2(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),velocidadeMinima+10);   
+    }
+    else{
+        return setTimeout(()=> foguete2(num+1,false,vel,pont,checaDireção(num,dir,dirFinal),dirFinal),velocidadeMinima);
+    }
+}
+
+
+function sacanaStart (num,des,vel,pont,dir,dirFinal,volta) {
+    numberIndicator.textContent = String(num).padStart(2,0)
+    pontuacao.textContent = String(pont).padStart(2,0)
+    moverBola(num,dir)
+    // quando a bola chega a 50 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
+    
+    if (num >= 50){
+        return setTimeout(()=>sacanaStart(num-1,true,vel,pont,dir,dirFinal,volta),vel)
+    }
+    if (num == 40 && des && volta){
+        return setTimeout(()=>trocarEstado(num+1,vel,pont,dir),vel)
+    }
+
+    // se a bola tiver descendo, o chute acertou e a bola tá no intervalo de chute, volta pra função principal e adiciona pontuação
+    if (checarChute(dir) && des && num <= intervaloChute && num >= 0){
+        const novaVel = Math.max(velocidadeMinima, vel - 5);
+        return trocarEstado(num+1, novaVel, pont + intervaloChute - num,dir,dirFinal);
+    }
+
+    if (num < 0) {return};
+
+    if (des){
+        return setTimeout(()=> sacanaStart(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal,volta),vel);   
+    }
+    else{
+        return setTimeout(()=> sacanaStart(num+1,false,vel,pont,checaDireção(num,dir,dirFinal),dirFinal,volta),velocidadeMinima);
+    }   
+}
+
 // a bola vai e volta
 function sacana  (num,des,vel,pont,dir,dirFinal,volta) {
     numberIndicator.textContent = String(num).padStart(2,0)
     pontuacao.textContent = String(pont).padStart(2,0)
-    moverBarra(num,dir)
-    // quando a bola chega a 10 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
+    moverBola(num,dir)
+    // quando a bola chega a 50 a des é colocada pra true e o numero é diminuido, pra fazer a bola começar a descer
     
     if (num >= 50){
         return setTimeout(()=>sacana(num-1,true,vel,pont,dir,dirFinal,volta),vel)
@@ -300,13 +471,13 @@ function sacana  (num,des,vel,pont,dir,dirFinal,volta) {
         return setTimeout(()=>sacana(num+1,false,vel,pont,dir,!dirFinal,!volta),vel)
     }
 
-    // se o jogador estiver chutando ele checa se o num é dois ou menor, se for bota des pra falso, joga o num pra cima e adiciona pontuação 
+    // se a bola tiver descendo, o chute acertou e a bola tá no intervalo de chute, volta pra função principal e adiciona pontuação
     if (checarChute(dir) && des && num <= intervaloChute && num >= 0){
         const novaVel = Math.max(velocidadeMinima, vel - 5);
         return trocarEstado(num+1, novaVel, pont + intervaloChute - num,dir,dirFinal);
     }
 
-    if (num < 0) return;
+    if (num < 0) {return};
 
     if (des){
         return setTimeout(()=> sacana(num-1,true,vel,pont,checaDireção(num,dir,dirFinal),dirFinal,volta),vel);   
@@ -317,26 +488,30 @@ function sacana  (num,des,vel,pont,dir,dirFinal,volta) {
 }
 
 //troca a função que a bola usa pra se mover depois de um chute
-function trocarEstado(num,_vel,pont,dir){
+function trocarEstado(num,vel,pont,dir){
     pararChutar()
     const dificuldade = dificuldadeAtual(pont)
     const novoEstado = dificuldade.estados[random(dificuldade)]
-    if (novoEstado.fun === "recurcao"){
+    if (novoEstado.fun == "recurcao"){
         recurcao(num,false, dificuldade.vel,pont,dir,novoEstado.dirFinal)
     } 
-    if (novoEstado.fun === "trocar"){
+    if (novoEstado.fun == "trocar"){
         trocar(num,false, dificuldade.vel,pont,dir,novoEstado.dirFinal)
     }
-    if (novoEstado.fun === "foguete"){
+    if (novoEstado.fun == "foguete"){
         foguete(num,false, dificuldade.vel,pont,dir,novoEstado.dirFinal)
     }
-    if (novoEstado.fun === "sacana"){
+    if (novoEstado.fun == "sacana"){
         sacana(num,false, dificuldade.vel,pont,dir,novoEstado.dirFinal,true)
+    }
+    if (novoEstado.fun == "sacanaStart"){
+        sacanaStart(num,false, dificuldade.vel,pont,dir,novoEstado.dirFinal,true)
+    }
+    if (novoEstado.fun == "foguete2"){
+        foguete2(num,false, dificuldade.vel,pont,dir,novoEstado.dirFinal)
     }
 }
 
 //inicio do jogo
 animarChute()
-jogando.jogando = true
-trocarEstado(1,80,0,"esquerda")
-jogando.jogando = false
+trocarEstado(0,0,0,"esquerda")

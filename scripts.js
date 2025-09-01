@@ -34,7 +34,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"sacana"},
             {dirFinal:"direita",fun:"sacana"}
         ],
-        vel:30,
+        vel:35,
         minNivel:10,
         proxNivel:20
     },
@@ -45,7 +45,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"trocar"},
             {dirFinal:"direita",fun:"trocar"}
         ],
-        vel:25,
+        vel:35,
         minNivel:20,
         proxNivel:30
     },
@@ -58,7 +58,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"sacana"},
             {dirFinal:"direita",fun:"sacana"}
         ],
-        vel:20,
+        vel:30,
         minNivel:30,
         proxNivel:40
     },
@@ -69,7 +69,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"foguete"},
             {dirFinal:"direita",fun:"foguete"}
         ],
-        vel:15,
+        vel:25,
         minNivel:40,
         proxNivel:50
     },
@@ -84,7 +84,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"sacana"},
             {dirFinal:"direita",fun:"sacana"}
         ],
-        vel:15,
+        vel:25,
         minNivel:50,
         proxNivel:60
     },
@@ -101,7 +101,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"sacanaStart"},
             {dirFinal:"direita",fun:"sacanaStart"}
         ],
-        vel:15,
+        vel:20,
         minNivel:60,
         proxNivel:70
     },
@@ -129,7 +129,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"foguete2"},
             {dirFinal:"direita",fun:"foguete2"}
         ],
-        vel:10,
+        vel:20,
         minNivel:80,
         proxNivel:90
     },
@@ -148,7 +148,7 @@ const dificuldades = [
             {dirFinal:"esquerda",fun:"sacanaStart"},
             {dirFinal:"direita",fun:"sacanaStart"}
         ],
-        vel:10,
+        vel:15,
         minNivel:90,
         proxNivel:100
     },
